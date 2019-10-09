@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "resolveJsonModule": true,
+    "module": "commonjs",
+    "outDir": "./dist",
+    "allowJs": true,
+    "strict": true,
+    "sourceMap": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ]
+}
