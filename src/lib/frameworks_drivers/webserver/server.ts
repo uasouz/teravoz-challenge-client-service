@@ -28,7 +28,7 @@ export default class ExpressServer implements IServer {
     }
 
     registerRoutes() {
-        this.express.post("/webhook", eventProcessor.processEvent);
+        this.express.post("/webhook", eventProcessor.processEvent.bind(eventProcessor));
     }
 
     listen(port: number | string) {

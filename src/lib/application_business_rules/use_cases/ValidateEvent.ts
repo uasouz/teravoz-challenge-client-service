@@ -1,7 +1,7 @@
 import {Events} from "../../frameworks_drivers/webserver/events";
 
 function IsValidEvent(event: any) {
-    return Object.values(Events).includes(event.type)
+    return Object.keys(Events).includes(event.type)
 }
 
 function getEventCategory(event: any) {
