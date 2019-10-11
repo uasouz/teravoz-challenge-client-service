@@ -14,11 +14,11 @@ const EventRepositoryInMysql_1 = require("../storage/EventRepositoryInMysql");
 const response_1 = require("../util/response");
 const RegisterNewCall_1 = require("../../application_business_rules/use_cases/RegisterNewCall");
 const CallRepositoryInMysql_1 = require("../storage/CallRepositoryInMysql");
-const SetCallStatus_1 = require("../../application_business_rules/use_cases/SetCallStatus");
+const SetCallState_1 = require("../../application_business_rules/use_cases/SetCallState");
 function CallNew(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const callEvent = CallEvent_1.CallEvent.serialize(req.body);
-        const isValidCall = ValidateEvent_1.ValidateCall(callEvent);
+        const isValidCall = ValidateEvent_1.ValidateCallEvent(callEvent);
         if (!isValidCall) {
             return response_1.BaseResponse.Fail(res, {});
         }
@@ -34,18 +34,16 @@ exports.CallNew = CallNew;
 function CallStandBy(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const callEvent = CallEvent_1.CallEvent.serialize(req.body);
-        const isValidCall = ValidateEvent_1.ValidateCall(callEvent);
-        if (!isValidCall) {
+        const isValidCallEvent = ValidateEvent_1.ValidateCallEvent(callEvent);
+        if (!isValidCallEvent) {
             return response_1.BaseResponse.Fail(res, {});
         }
-        const setCallStatusResult = yield SetCallStatus_1.SetCallStatus(callEvent, CallRepositoryInMysql_1.callRepository);
-        if (setCallStatusResult) {
-            const event = yield EventRepositoryInMysql_1.eventRepository.RegisterEvent(callEvent);
-            return response_1.BaseResponse.Succeed(res, event);
+        const setCallStatusResult = yield SetCallState_1.SetCallState(callEvent, CallRepositoryInMysql_1.callRepository);
+        if (!setCallStatusResult.success) {
+            return response_1.BaseResponse.Fail(res, setCallStatusResult.errors);
         }
-        else {
-            return response_1.BaseResponse.Fail(res, ["Failed to register Call Status change"]);
-        }
+        const event = yield EventRepositoryInMysql_1.eventRepository.RegisterEvent(callEvent);
+        return response_1.BaseResponse.Succeed(res, event);
     });
 }
 exports.CallStandBy = CallStandBy;

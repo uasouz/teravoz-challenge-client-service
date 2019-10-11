@@ -31,9 +31,9 @@ class CallRepositoryInMysql {
             return this.FindCall({ id: result[0] });
         });
     }
-    SetCallStatus(call_id, status) {
+    SetCallState(call_id, state) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield database_1.default('calls').where({ aggregate_id: call_id }).update({ status: status }, ["*"]);
+            const result = yield database_1.default('calls').where({ aggregate_id: call_id }).update({ state: state }, ["*"]);
             return this.FindCall({ id: result });
         });
     }

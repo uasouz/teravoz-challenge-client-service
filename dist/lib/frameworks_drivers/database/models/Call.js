@@ -4,7 +4,7 @@ class Call {
     constructor(id, aggregate_id, status, created_at, updated_at) {
         this.id = id;
         this.aggregate_id = aggregate_id;
-        this.status = status;
+        this.state = status;
         this.created_at = created_at;
         this.updated_at = updated_at;
     }

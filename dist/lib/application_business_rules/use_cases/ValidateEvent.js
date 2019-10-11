@@ -10,7 +10,8 @@ function getEventCategory(event) {
 function isCallEvent(eventType) {
     return eventType === "call";
 }
-function ValidateCall(event) {
+//Validates CallEvent by checking if it is a valid event and if is a `call.` event
+function ValidateCallEvent(event) {
     const eventTypeExists = IsValidEvent(event);
     if (eventTypeExists) {
         if (isCallEvent(getEventCategory(event))) {
@@ -20,5 +21,5 @@ function ValidateCall(event) {
     }
     return false;
 }
-exports.ValidateCall = ValidateCall;
+exports.ValidateCallEvent = ValidateCallEvent;
 //# sourceMappingURL=ValidateEvent.js.map

@@ -21,8 +21,8 @@ class CallRepositoryInMysql implements ICallRepository {
         return this.FindCall({id: result[0]})
     }
 
-    async SetCallStatus(call_id: string, status: string): Promise<Call> {
-        const result = await database('calls').where({aggregate_id: call_id}).update({status: status}, ["*"]);
+    async SetCallState(call_id: string, state: string): Promise<Call> {
+        const result = await database('calls').where({aggregate_id: call_id}).update({state: state}, ["*"]);
         return this.FindCall({id: result})
     }
 

@@ -7,7 +7,7 @@ import {Result} from "../../enterprise_business_rules/util/result";
 function CreateNewCall(call: CallEvent) {
     return {
         aggregate_id: call.call_id,
-        status: "NEW"
+        state: "NEW"
     }
 }
 

@@ -5,33 +5,32 @@ import {eventRepository} from "../storage/EventRepositoryInMysql";
 import {BaseResponse} from "../util/response";
 import {RegisterNewCall} from "../../application_business_rules/use_cases/RegisterNewCall";
 import {callRepository} from "../storage/CallRepositoryInMysql";
-import {SetCallStatus} from "../../application_business_rules/use_cases/SetCallStatus";
+import {SetCallState} from "../../application_business_rules/use_cases/SetCallState";
 
-export async function CallNew (req:Request,res: Response) {
+export async function CallNew(req: Request, res: Response) {
     const callEvent = CallEvent.serialize(req.body);
     const isValidCall = ValidateCallEvent(callEvent);
-    if(!isValidCall){
+    if (!isValidCall) {
         return BaseResponse.Fail(res, {})
     }
-    const registerCallResult = await RegisterNewCall(callEvent,callRepository);
-    if(registerCallResult.success) {
+    const registerCallResult = await RegisterNewCall(callEvent, callRepository);
+    if (registerCallResult.success) {
         const event = await eventRepository.RegisterEvent(callEvent);
         return BaseResponse.Succeed(res, event)
     }
-    return BaseResponse.Fail(res,registerCallResult.errors)
+    return BaseResponse.Fail(res, registerCallResult.errors)
 }
 
 export async function CallStandBy(req: Request, res: Response) {
     const callEvent = CallEvent.serialize(req.body);
-    const isValidCall = ValidateCallEvent(callEvent);
-    if(!isValidCall){
+    const isValidCallEvent = ValidateCallEvent(callEvent);
+    if (!isValidCallEvent) {
         return BaseResponse.Fail(res, {})
     }
-    const setCallStatusResult = await SetCallStatus(callEvent,callRepository);
-    if(setCallStatusResult){
-        const event = await eventRepository.RegisterEvent(callEvent);
-        return BaseResponse.Succeed(res, event)
-    } else {
-        return BaseResponse.Fail(res, ["Failed to register Call Status change"])
+    const setCallStatusResult = await SetCallState(callEvent, callRepository);
+    if (!setCallStatusResult.success) {
+        return BaseResponse.Fail(res, setCallStatusResult.errors)
     }
+    const event = await eventRepository.RegisterEvent(callEvent);
+    return BaseResponse.Succeed(res, event)
 }

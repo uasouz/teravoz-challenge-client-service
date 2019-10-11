@@ -6,7 +6,7 @@ export async function setupCallsTable(database: Knex) {
         await database.schema.createTable("calls", (table) => {
             table.increments();
             table.string("aggregate_id",32).notNullable();
-            table.enum("status",["NEW","STANDBY","WAITING","ONGOING","FINISHED"]).defaultTo("NEW");
+            table.enum("state",["NEW","STANDBY","WAITING","ONGOING","FINISHED"]).defaultTo("NEW");
             table.timestamps(true,true)
         });
     }

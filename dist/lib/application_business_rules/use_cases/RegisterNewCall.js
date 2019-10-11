@@ -14,7 +14,7 @@ const result_1 = require("../../enterprise_business_rules/util/result");
 function CreateNewCall(call) {
     return {
         aggregate_id: call.call_id,
-        status: "NEW"
+        state: "NEW"
     };
 }
 //Check if the call_id already exists on database

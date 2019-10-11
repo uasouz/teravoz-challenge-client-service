@@ -6,5 +6,5 @@ export interface ICallRepository {
 
     RegisterNewCall(call: any): Promise<Call>
 
-    SetCallStatus(call_id: string, status: string): Promise<Call>
+    SetCallState(call_id: string, status: string): Promise<Call>
 }
