@@ -32,7 +32,7 @@ class EventProcessor {
     }
 
     processEvent(req: Request, res: Response) {
-        const eventHandler = this.eventHandlers.get(Events[req.body.type]);
+        const eventHandler = this.eventHandlers.get(req.body.type);
         if (eventHandler) {
             try {
                 eventHandler(req, res)

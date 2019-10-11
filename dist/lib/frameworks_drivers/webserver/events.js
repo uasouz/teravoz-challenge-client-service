@@ -3,23 +3,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Events;
 (function (Events) {
     //Call Events
-    Events["call.new"] = "CallNew";
-    Events["call.standby"] = "CallStandby";
-    Events["call.waiting"] = "CallWaiting";
-    Events["call.ongoing"] = "CallOngoing";
-    Events["call.overflow"] = "CallOverflow";
-    Events["call.follow-me"] = "CallFollowMe";
-    Events["call.finished"] = "CallFinished";
-    Events["call.recording-available"] = "CallRecordingAvailable";
-    Events["call.queue-abandon"] = "CallQueueAbandon";
+    Events["CallNew"] = "call.new";
+    Events["CallStandby"] = "call.standby";
+    Events["CallWaiting"] = "call.waiting";
+    Events["CallOngoing"] = "call.ongoing";
+    Events["CallOverflow"] = "call.overflow";
+    Events["CallFollowMe"] = "call.follow-me";
+    Events["CallFinished"] = "call.finished";
+    Events["CallRecordingAvailable"] = "call.recording-available";
+    Events["CallQueueAbandon"] = "call.queue-abandon";
     //Actor Events
-    Events["actor.logged-in"] = "ActorLoggedIn";
-    Events["actor.logged-out"] = "ActorLoggedOut";
-    Events["actor.entered"] = "ActorEntered";
-    Events["actor.left"] = "ActorLeft";
-    Events["actor.ringing"] = "ActorRinging";
-    Events["actor.noanswer"] = "ActorNoAnswer";
-    Events["actor.paused"] = "ActorPaused";
-    Events["actor.unpaused"] = "ActorUnpaused";
+    Events["ActorLoggedIn"] = "actor.logged-in";
+    Events["ActorLoggedOut"] = "actor.logged-out";
+    Events["ActorEntered"] = "actor.entered";
+    Events["ActorLeft"] = "actor.left";
+    Events["ActorRinging"] = "actor.ringing";
+    Events["ActorNoAnswer"] = "actor.noanswer";
+    Events["ActorPaused"] = "actor.paused";
+    Events["ActorUnpaused"] = "actor.unpaused";
 })(Events = exports.Events || (exports.Events = {}));
 //# sourceMappingURL=events.js.map

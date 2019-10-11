@@ -1,13 +1,13 @@
-import {Call} from "./Call";
+import {CallEvent} from "./CallEvent";
 import {fromBinaryUUID} from "../../util/binary-uuid/binary-uuid";
 
 export class Event {
     id: number;
     aggregate_id: string;
     uuid: string;
-    event: Call;
+    event: CallEvent;
 
-    constructor(id: number,aggregate_id: string, uuid: Buffer, event: Call) {
+    constructor(id: number,aggregate_id: string, uuid: Buffer, event: CallEvent) {
         this.id = id;
         this.aggregate_id = aggregate_id;
         this.uuid = fromBinaryUUID(uuid);

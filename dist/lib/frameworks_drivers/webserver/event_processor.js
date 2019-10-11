@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = require("../logger");
 const response_1 = require("../../interface_adapters/util/response");
-const events_1 = require("./events");
 class EventProcessor {
     constructor() {
         this.eventHandlers = new Map();
@@ -25,7 +24,7 @@ class EventProcessor {
         this.eventHandlers.set(f.name, f);
     }
     processEvent(req, res) {
-        const eventHandler = this.eventHandlers.get(events_1.Events[req.body.type]);
+        const eventHandler = this.eventHandlers.get(req.body.type);
         if (eventHandler) {
             try {
                 eventHandler(req, res);

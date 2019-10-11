@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const knex = require("knex");
 const dotenv = require("dotenv");
 const events_1 = require("./events");
+const calls_1 = require("./calls");
 dotenv.config();
 const env = process.env.NODE_ENV || "development";
 const config = {
@@ -39,6 +40,7 @@ exports.database = knex({
         database: config.database
     }
 });
-events_1.setupDatabase(exports.database);
+events_1.setupEventsTable(exports.database);
+calls_1.setupCallsTable(exports.database);
 exports.default = exports.database;
 //# sourceMappingURL=index.js.map

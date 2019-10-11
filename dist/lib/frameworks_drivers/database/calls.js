@@ -8,20 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-function setupEventsTable(database) {
+function setupCallsTable(database) {
     return __awaiter(this, void 0, void 0, function* () {
-        const hasTable = yield database.schema.hasTable("events");
+        const hasTable = yield database.schema.hasTable("calls");
         if (!hasTable) {
-            yield database.schema.createTable("events", (table) => {
+            yield database.schema.createTable("calls", (table) => {
                 table.increments();
                 table.string("aggregate_id", 32).notNullable();
-                table.binary("uuid", 16).notNullable().unique();
-                table.json("event").notNullable();
-                table.boolean("valid").notNullable().defaultTo(1);
+                table.enum("status", ["NEW", "STANDBY", "WAITING", "ONGOING", "FINISHED"]).defaultTo("NEW");
                 table.timestamps(true, true);
             });
         }
     });
 }
-exports.setupEventsTable = setupEventsTable;
-//# sourceMappingURL=events.js.map
+exports.setupCallsTable = setupCallsTable;
+//# sourceMappingURL=calls.js.map

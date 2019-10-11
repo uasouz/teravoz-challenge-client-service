@@ -1,6 +1,6 @@
 import * as Knex from "knex";
 
-export async function setupDatabase(database: Knex) {
+export async function setupEventsTable(database: Knex) {
     const hasTable = await database.schema.hasTable("events");
     if(!hasTable){
         await database.schema.createTable("events", (table) => {

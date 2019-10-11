@@ -1,6 +1,6 @@
-import {Call} from "../models/Call";
+import {CallEvent} from "../models/CallEvent";
 //This is the mocked TeraVoz API Client
 
-export function delegate(call: Call) {
+export function delegate(call: CallEvent) {
 
 }

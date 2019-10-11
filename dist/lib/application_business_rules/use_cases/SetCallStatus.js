@@ -8,20 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-function setupEventsTable(database) {
+var Status;
+(function (Status) {
+    Status["call.new"] = "NEW";
+    Status["call.standby"] = "STANDBY";
+    Status["call.waiting"] = "WAITING";
+    Status["call.ongoing"] = "ONGOING";
+    Status["call.finished"] = "FINISHED";
+})(Status || (Status = {}));
+function SetCallStatus(callEvent, callRepository) {
     return __awaiter(this, void 0, void 0, function* () {
-        const hasTable = yield database.schema.hasTable("events");
-        if (!hasTable) {
-            yield database.schema.createTable("events", (table) => {
-                table.increments();
-                table.string("aggregate_id", 32).notNullable();
-                table.binary("uuid", 16).notNullable().unique();
-                table.json("event").notNullable();
-                table.boolean("valid").notNullable().defaultTo(1);
-                table.timestamps(true, true);
-            });
-        }
+        // @ts-ignore
+        return yield callRepository.SetCallStatus(callEvent.call_id, Status[callEvent.type]);
     });
 }
-exports.setupEventsTable = setupEventsTable;
-//# sourceMappingURL=events.js.map
+exports.SetCallStatus = SetCallStatus;
+//# sourceMappingURL=SetCallStatus.js.map

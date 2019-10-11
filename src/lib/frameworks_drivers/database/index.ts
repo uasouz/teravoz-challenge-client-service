@@ -1,6 +1,7 @@
 import * as knex from "knex"
 import * as dotenv from "dotenv";
-import {setupDatabase} from "./events";
+import {setupEventsTable} from "./events";
+import {setupCallsTable} from "./calls";
 
 dotenv.config();
 const env = process.env.NODE_ENV || "development";
@@ -47,6 +48,7 @@ export const database = knex({
     }
 });
 
-setupDatabase(database);
+setupEventsTable(database);
+setupCallsTable(database);
 
 export default database;

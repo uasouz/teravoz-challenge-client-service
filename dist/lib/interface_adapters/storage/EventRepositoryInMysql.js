@@ -9,11 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("../../frameworks_drivers/database");
-const Call_1 = require("../../enterprise_business_rules/models/Call");
-class CallRepositoryInMysql {
-    FindCall(params) {
+const Event_1 = require("../../enterprise_business_rules/models/Event");
+const CreateEvent_1 = require("../../application_business_rules/use_cases/CreateEvent");
+class EventRepositoryInMysql {
+    FindEvent(params) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = database_1.default('calls');
+            let result = database_1.default('events');
             if (Array.isArray(params)) {
                 params.forEach((value) => {
                     result = result.orWhere(value);
@@ -22,21 +23,15 @@ class CallRepositoryInMysql {
             else {
                 result = result.where(params);
             }
-            return Call_1.Call.serialize(yield result);
+            return Event_1.Event.serialize(yield result);
         });
     }
-    RegisterNewCall(call) {
+    RegisterEvent(event) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield database_1.default('calls').insert(call, ["*"]);
-            return this.FindCall({ id: result[0] });
-        });
-    }
-    SetCallStatus(call_id, status) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const result = yield database_1.default('calls').where({ aggregate_id: call_id }).update({ status: status }, ["*"]);
-            return this.FindCall({ id: result });
+            const result = yield database_1.default('events').insert(CreateEvent_1.CreateEvent(event), ["*"]);
+            return this.FindEvent({ id: result[0] });
         });
     }
 }
-exports.callRepository = new CallRepositoryInMysql();
-//# sourceMappingURL=CallRepositoryInMysql.js.map
+exports.eventRepository = new EventRepositoryInMysql();
+//# sourceMappingURL=EventRepositoryInMysql.js.map

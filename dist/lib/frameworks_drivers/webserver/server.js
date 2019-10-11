@@ -6,6 +6,7 @@ const event_processor_1 = require("./event_processor");
 // @ts-ignore
 const expresspino = require("express-pino-logger");
 const WebHookController_1 = require("../../interface_adapters/controllers/WebHookController");
+const events_1 = require("./events");
 class ExpressServer {
     constructor() {
         this.express = express();
@@ -21,7 +22,8 @@ class ExpressServer {
         this.registerRoutes();
     }
     initializeHandlers() {
-        event_processor_1.eventProcessor.addEventHandler(WebHookController_1.CallNew);
+        event_processor_1.eventProcessor.addEventHandlerWithKey(events_1.Events.CallNew, WebHookController_1.CallNew);
+        event_processor_1.eventProcessor.addEventHandlerWithKey(events_1.Events.CallStandby, WebHookController_1.CallStandBy);
     }
     registerRoutes() {
         this.express.post("/webhook", event_processor_1.eventProcessor.processEvent.bind(event_processor_1.eventProcessor));
