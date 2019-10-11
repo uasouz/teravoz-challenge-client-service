@@ -24,6 +24,7 @@ class ExpressServer {
     initializeHandlers() {
         event_processor_1.eventProcessor.addEventHandlerWithKey(events_1.Events.CallNew, WebHookController_1.CallNew);
         event_processor_1.eventProcessor.addEventHandlerWithKey(events_1.Events.CallStandby, WebHookController_1.CallStandBy);
+        event_processor_1.eventProcessor.addEventHandlerWithKey(events_1.Events.CallWaiting, WebHookController_1.CallWaiting);
     }
     registerRoutes() {
         this.express.post("/webhook", event_processor_1.eventProcessor.processEvent.bind(event_processor_1.eventProcessor));

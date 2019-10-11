@@ -1,4 +1,4 @@
-import {StateTrasition, State} from "../../util/state-trasition";
+import {StateTrasition, State} from "../util/state-trasition";
 
 //Call Serialization Class
 export class Call extends StateTrasition {

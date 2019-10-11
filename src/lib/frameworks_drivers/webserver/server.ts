@@ -4,7 +4,7 @@ import {eventProcessor} from "./event_processor"
 // @ts-ignore
 import * as expresspino from "express-pino-logger"
 import IServer from "./server_interface";
-import {CallNew, CallStandBy} from "../../interface_adapters/controllers/WebHookController";
+import {CallNew, CallStandBy, CallWaiting} from "../../interface_adapters/controllers/WebHookController";
 import {Events} from "./events";
 
 export default class ExpressServer implements IServer {
@@ -25,8 +25,9 @@ export default class ExpressServer implements IServer {
     }
 
     initializeHandlers() {
-        eventProcessor.addEventHandlerWithKey(Events.CallNew,CallNew)
-        eventProcessor.addEventHandlerWithKey(Events.CallStandby,CallStandBy)
+        eventProcessor.addEventHandlerWithKey(Events.CallNew,CallNew);
+        eventProcessor.addEventHandlerWithKey(Events.CallStandby,CallStandBy);
+        eventProcessor.addEventHandlerWithKey(Events.CallWaiting,CallWaiting);
     }
 
     registerRoutes() {

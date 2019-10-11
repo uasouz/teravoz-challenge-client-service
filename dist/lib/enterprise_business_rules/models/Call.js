@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const state_trasition_1 = require("../../util/state-trasition");
+const state_trasition_1 = require("../util/state-trasition");
 //Call Serialization Class
 class Call extends state_trasition_1.StateTrasition {
     constructor(id, aggregate_id, state, created_at, updated_at) {
