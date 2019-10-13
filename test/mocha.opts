@@ -1,0 +1,4 @@
+--require ts-node/register
+--reporter spec
+--slow 5000
+test/**/*.test.ts

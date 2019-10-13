@@ -9,6 +9,11 @@ const WebHookController_1 = require("../../interface_adapters/controllers/WebHoo
 const events_1 = require("./events");
 //Server interface implementation using Express
 class ExpressServer {
+    address() {
+        if (this.listener) {
+            return this.listener.address();
+        }
+    }
     constructor() {
         this.express = express();
         this.express.use(bodyParser.urlencoded({ extended: true }));
@@ -37,8 +42,8 @@ class ExpressServer {
         this.express.post("/webhook", event_processor_1.eventProcessor.processEvent.bind(event_processor_1.eventProcessor));
     }
     listen(port) {
-        const listener = this.express.listen(port);
-        return listener.address();
+        this.listener = this.express.listen(port);
+        return this.listener.address();
     }
 }
 exports.default = ExpressServer;

@@ -1,6 +1,7 @@
 import {createMessage, Message} from "../../frameworks_drivers/websocket_server/message";
 import {callRepository} from "../storage/CallRepositoryInMysql";
 import {eventRepository} from "../storage/EventRepositoryInMysql";
+import {WebSocket} from "uWebSockets.js"
 
 export async function ListCalls(ws: WebSocket, message: Message) {
     const calls = await callRepository.FindCall(message.data.params);

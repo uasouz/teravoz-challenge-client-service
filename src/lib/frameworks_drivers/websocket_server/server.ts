@@ -1,12 +1,8 @@
 import {App, TemplatedApp} from "uWebSockets.js";
 import {createMessage, Message, validateMessage} from "./message";
 import {eventProcessor} from "./event_processor"
-import {
-    Identify,
-    UpdateStatus,
-    SetUserStatusOffline
-} from "../../interface_adapters/controllers/WebsocketUserStatusController";
 import {Logger} from "../logger";
+import {ListCallEvents, ListCalls} from "../../interface_adapters/controllers/WebSocketController";
 
 export default class uWsServer {
     public app: TemplatedApp;
@@ -14,17 +10,14 @@ export default class uWsServer {
 
     constructor() {
         this.app = App();
-        this.app.ws("/*", {
+        this.app.ws("/ws/*", {
             /* Options */
             compression: 0,//0 - disabled | 1 - Shared Compressor | 2 - Dedicated Compressor
             maxPayloadLength: 16 * 1024 * 1024,
-            idleTimeout: 30,
+            idleTimeout: 1800,
             /* Handlers */
             open: (ws, req) => {
-                const Identity = Identify(ws, req);
-                if (Identity.isValid) {
-                    ws.userData = Identity.data
-                }
+                ws.send(createMessage("Welcome","Welcome").toString())
             },
             message: (ws, data, isBinary) => {
                 const message = JSON.parse(this.decoder.decode(data)) as Message;
@@ -42,14 +35,14 @@ export default class uWsServer {
                 Logger.warn('WebSocket backpressure: ' + ws.getBufferedAmount());
             },
             close: (ws, code, message) => {
-                SetUserStatusOffline(ws);
                 Logger.info('WebSocket closed');
             }
         });
     }
 
     initializeHandlers() {
-        eventProcessor.addEventHandler(UpdateStatus)
+        eventProcessor.addEventHandler(ListCalls);
+        eventProcessor.addEventHandler(ListCallEvents);
     }
 
     registerRoutes() {

@@ -13,10 +13,18 @@ import {
     CallWaiting
 } from "../../interface_adapters/controllers/WebHookController";
 import {Events} from "./events";
+import {Server} from "http";
 
 //Server interface implementation using Express
 export default class ExpressServer implements IServer {
     public express: express.Application;
+    listener?: Server;
+
+    address(){
+        if(this.listener) {
+            return this.listener.address()
+        }
+    }
 
     constructor() {
         this.express = express();
@@ -50,8 +58,8 @@ export default class ExpressServer implements IServer {
 
     listen(port: number | string) {
 
-        const listener = this.express.listen(port);
-        return listener.address()
+        this.listener = this.express.listen(port);
+        return this.listener.address()
 
     }
 }
