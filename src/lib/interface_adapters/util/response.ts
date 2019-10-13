@@ -1,3 +1,4 @@
+// Serializes and respond data,messages and errors from the Web Service
 export class BaseResponse {
     success: boolean;
     code: number;

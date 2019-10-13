@@ -1,22 +1,21 @@
-import {CallEvent} from "./CallEvent";
 import {fromBinaryUUID} from "../../util/binary-uuid/binary-uuid";
-//Event class serializes event coming/going from/to the database
-export class Event {
-    id: number;
-    aggregate_id: string;
-    uuid: string;
-    event: CallEvent;
 
-    constructor(id: number,aggregate_id: string, uuid: Buffer, event: CallEvent) {
+//Actor class serializes events coming from the database to be used by the service
+export class Actor {
+    id: number;
+    actor: string;
+    uuid: string;
+    number: string;
+
+    constructor(id: number, uuid: Buffer, actor: string, number: string) {
         this.id = id;
-        this.aggregate_id = aggregate_id;
         this.uuid = fromBinaryUUID(uuid);
-        this.event = event;
+        this.actor = actor;
+        this.number = number;
     }
 
-
-    private static serializeSingle(event: any) {
-        return new Event(event.id, event.aggregate_id, event.uuid, event.event);
+    private static serializeSingle(actor: any) {
+        return new Actor(actor.id, actor.uuid, actor.actor, actor.number);
     }
 
     static serialize(data: object) {
@@ -28,5 +27,4 @@ export class Event {
         }
         return this.serializeSingle(data)
     }
-
 }

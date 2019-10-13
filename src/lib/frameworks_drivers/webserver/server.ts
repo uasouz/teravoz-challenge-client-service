@@ -4,9 +4,16 @@ import {eventProcessor} from "./event_processor"
 // @ts-ignore
 import * as expresspino from "express-pino-logger"
 import IServer from "./server_interface";
-import {CallNew, CallStandBy, CallWaiting} from "../../interface_adapters/controllers/WebHookController";
+import {
+    CallFinished,
+    CallNew,
+    CallOngoing,
+    CallStandBy,
+    CallWaiting
+} from "../../interface_adapters/controllers/WebHookController";
 import {Events} from "./events";
 
+//Server interface implementation using Express
 export default class ExpressServer implements IServer {
     public express: express.Application;
 
@@ -24,12 +31,16 @@ export default class ExpressServer implements IServer {
         this.registerRoutes()
     }
 
+    //Configure handlers for each event type
     initializeHandlers() {
         eventProcessor.addEventHandlerWithKey(Events.CallNew,CallNew);
         eventProcessor.addEventHandlerWithKey(Events.CallStandby,CallStandBy);
         eventProcessor.addEventHandlerWithKey(Events.CallWaiting,CallWaiting);
+        eventProcessor.addEventHandlerWithKey(Events.CallOngoing,CallOngoing);
+        eventProcessor.addEventHandlerWithKey(Events.CallOngoing,CallFinished);
     }
 
+    //Registers the REST routes
     registerRoutes() {
         this.express.post("/webhook", eventProcessor.processEvent.bind(eventProcessor));
     }

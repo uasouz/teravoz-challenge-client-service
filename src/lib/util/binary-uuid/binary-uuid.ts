@@ -1,4 +1,5 @@
 const v1 = require("uuid/v1");
+//Utils used to convert UUIDs to and from compacted binary format
 
 export function fromBinaryUUID(buf: Buffer) {
     return [

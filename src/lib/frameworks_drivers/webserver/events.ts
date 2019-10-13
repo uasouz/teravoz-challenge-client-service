@@ -1,3 +1,4 @@
+//Set of Events possible to be received on WebHook
 export enum Events {
     //Call Events
     "CallNew" = "call.new",

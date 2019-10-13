@@ -23,8 +23,8 @@ export async function RegisterNewCall(call: CallEvent, callRepository: ICallRepo
         const registerResult = await callRepository.RegisterNewCall(CreateNewCall(call));
         return Result.Succeed(registerResult)
     } else {
-        return Result.Fail("Wrong type of event or event duplicated", //Errors can be acumutaled and passed here
+        return Result.Fail("Failed to register call - Wrong type of event or event duplicated", //Errors can be acumutaled and passed here
             false,
-            "Wrong type of event or event duplicated")
+            "Failed to register call - Wrong type of event or event duplicated")
     }
 }

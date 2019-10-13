@@ -1,6 +1,8 @@
 import {StateTrasition, State} from "../util/state-trasition";
 
-//Call Serialization Class
+//Call Class
+//Call class serializes events coming from the database to be used by the service
+//This class has a simple state control to avoid invalid transitions
 export class Call extends StateTrasition {
 
     id: number;

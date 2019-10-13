@@ -1,3 +1,4 @@
+// CallEvent class serializes a received event as a CallEvent to be used by the service
 export class CallEvent {
     type: string;
     call_id: string;

@@ -1,8 +1,8 @@
 import {ICallRepository} from "../../application_business_rules/repositories/CallRepository";
 import database from "../../frameworks_drivers/database";
 import {Call} from "../../enterprise_business_rules/models/Call";
-import {CallEvent} from "../../enterprise_business_rules/models/CallEvent";
 
+// CallRepository Interface implementation for MySql
 class CallRepositoryInMysql implements ICallRepository {
     async FindCall(params: any): Promise<Call> {
         let result = database('calls');

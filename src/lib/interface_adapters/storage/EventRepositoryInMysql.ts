@@ -3,6 +3,7 @@ import {IEventRepository} from "../../application_business_rules/repositories/Ev
 import {Event} from "../../enterprise_business_rules/models/Event";
 import {CreateEvent} from "../../application_business_rules/use_cases/CreateEvent";
 
+// EventRepository Interface implementation for MySql
 class EventRepositoryInMysql implements IEventRepository {
     async FindEvent(params: any): Promise<Event> {
         let result = database('events');

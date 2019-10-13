@@ -4,6 +4,7 @@ import {BaseResponse} from "../../interface_adapters/util/response";
 import {callRepository} from "../../interface_adapters/storage/CallRepositoryInMysql";
 import {Result} from "../../enterprise_business_rules/util/result";
 
+// Possible call states
 const States = new Map(Object.entries({
     "call.new": "NEW",
     "call.standby": "STANDBY",
@@ -12,6 +13,7 @@ const States = new Map(Object.entries({
     "call.finished": "FINISHED"
 }));
 
+// Set a datermined state to a call based on received event
 export async function SetCallState(callEvent: CallEvent, callRepository: ICallRepository) {
     const call = await callRepository.FindCall({aggregate_id: callEvent.call_id});
     if (!call) {

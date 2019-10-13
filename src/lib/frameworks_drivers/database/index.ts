@@ -12,11 +12,6 @@ const config = {
     "database": process.env.DB_SCHEMA,
     "host": process.env.DB_ADDR,
     "dialect": "mysql",
-    // "charset": "latin1",
-    // "collate": "latin1_swedish_ci",
-    // "logging": (data, benchmark) => {
-    //     console.log(JSON.stringify({time: new Date().getTime(), query: data, executionTime: benchmark}))
-    // },
     "benchmark": true,
     "pool": {
         "max": 100,
