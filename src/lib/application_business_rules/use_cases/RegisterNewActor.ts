@@ -7,7 +7,7 @@ import {createBinaryUUID} from "../../util/binary-uuid/binary-uuid";
 function CreateNewActor(actor: ActorEvent) {
     return {
         uuid: createBinaryUUID().buffer,
-        actor: actor.actor,
+        email: actor.actor,
         number: actor.number
     }
 }
@@ -20,12 +20,16 @@ async function ActorIsDuplicate(email: string, actorRepository: IActorRepository
 //Receives an Actor event and check if this event contains a new Actor,
 //if it contains a new Actor then this new actor is recorded to the database
 export async function RegisterNewActor(actorEvent: ActorEvent, actorRepository: IActorRepository) {
-    if (actorEvent.type === Events.CallNew && !await ActorIsDuplicate(actorEvent.actor, actorRepository)) {
-        const registerResult = await actorRepository.RegisterNewActor(CreateNewActor(actorEvent));
-        return Result.Succeed(registerResult)
+    if (actorEvent.type === Events.ActorEntered) {
+        const isActorDuplicate = await ActorIsDuplicate(actorEvent.actor, actorRepository);
+        if (!isActorDuplicate) {
+            const registerResult = await actorRepository.RegisterNewActor(CreateNewActor(actorEvent));
+            return Result.Succeed(registerResult)
+        }
+        return Result.Succeed(await actorRepository.FindActor({email: actorEvent.actor}))
     } else {
-        return Result.Fail("Failed to register actor - Wrong type of event or event duplicated",
+        return Result.Fail("Failed to register actor - Wrong type of event",
             false,
-            "Failed to register actor - Wrong type of event or event duplicated")
+            "Failed to register actor - Wrong type of event")
     }
 }

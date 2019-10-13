@@ -32,8 +32,8 @@ function RegisterNewCall(call, callRepository) {
             return result_1.Result.Succeed(registerResult);
         }
         else {
-            return result_1.Result.Fail("Wrong type of event or event duplicated", //Errors can be acumutaled and passed here
-            false, "Wrong type of event or event duplicated");
+            return result_1.Result.Fail("Failed to register call - Wrong type of event or event duplicated", //Errors can be acumutaled and passed here
+            false, "Failed to register call - Wrong type of event or event duplicated");
         }
     });
 }

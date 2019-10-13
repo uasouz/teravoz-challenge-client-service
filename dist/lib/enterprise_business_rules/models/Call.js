@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const state_trasition_1 = require("../util/state-trasition");
-//Call Serialization Class
+//Call Class
+//Call class serializes events coming from the database to be used by the service
+//This class has a simple state control to avoid invalid transitions
 class Call extends state_trasition_1.StateTrasition {
     constructor(id, aggregate_id, state, created_at, updated_at) {
         //Call States and allowed transitions
@@ -9,7 +11,7 @@ class Call extends state_trasition_1.StateTrasition {
             "NEW": new state_trasition_1.State("NEW", ["STANDBY"]),
             "STANDBY": new state_trasition_1.State("STANDBY", ["WAITING"]),
             "WAITING": new state_trasition_1.State("WAITING", ["ONGOING"]),
-            "ONGOIG": new state_trasition_1.State("ONGOING", ["FINISHED"]),
+            "ONGOING": new state_trasition_1.State("ONGOING", ["FINISHED"]),
             "FINISHED": new state_trasition_1.State("FINISHED")
         };
         super(state, callStates);

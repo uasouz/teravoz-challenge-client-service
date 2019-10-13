@@ -34,14 +34,7 @@ class EventProcessor {
             }
         }
         else {
-            response_1.BaseResponse.Fail(res, {
-                success: false,
-                error: "no suitable eventHandler for this event"
-            });
-            // createMessage({
-            //     success: false,
-            //     error: "no suitable eventHandler for this event"
-            // }, 'InvalidEvent',"Failed")
+            response_1.BaseResponse.Fail(res, ["no suitable eventHandler for this event"]);
         }
     }
 }

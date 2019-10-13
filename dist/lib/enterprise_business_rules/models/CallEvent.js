@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// CallEvent class serializes a received event as a CallEvent to be used by the service
 class CallEvent {
     constructor(type, call_id, code, direction, our_number, their_number, their_number_type, timestamp, queue, url) {
         this.type = type;

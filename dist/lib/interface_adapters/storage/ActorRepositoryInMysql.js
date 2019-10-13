@@ -8,14 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const Actor_1 = require("../../enterprise_business_rules/models/Actor");
 const database_1 = require("../../frameworks_drivers/database");
-const Event_1 = require("../../enterprise_business_rules/models/Event");
-const CreateEvent_1 = require("../../application_business_rules/use_cases/CreateEvent");
-// EventRepository Interface implementation for MySql
-class EventRepositoryInMysql {
-    FindEvent(params) {
+// ActorRepository Interface implementation for MySql
+class ActorRepositoryInMysql {
+    FindActor(params) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = database_1.default('events');
+            let result = database_1.default('actors');
             if (Array.isArray(params)) {
                 params.forEach((value) => {
                     result = result.orWhere(value);
@@ -24,15 +23,15 @@ class EventRepositoryInMysql {
             else {
                 result = result.where(params);
             }
-            return Event_1.Event.serialize(yield result);
+            return Actor_1.Actor.serialize(yield result);
         });
     }
-    RegisterEvent(event) {
+    RegisterNewActor(actor) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield database_1.default('events').insert(CreateEvent_1.CreateEvent(event), ["*"]);
-            return this.FindEvent({ id: result[0] });
+            const result = yield database_1.default('actors').insert(actor, ["*"]);
+            return this.FindActor({ id: result[0] });
         });
     }
 }
-exports.eventRepository = new EventRepositoryInMysql();
-//# sourceMappingURL=EventRepositoryInMysql.js.map
+exports.actorRepository = new ActorRepositoryInMysql();
+//# sourceMappingURL=ActorRepositoryInMysql.js.map

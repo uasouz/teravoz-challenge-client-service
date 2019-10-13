@@ -4,6 +4,7 @@ const knex = require("knex");
 const dotenv = require("dotenv");
 const events_1 = require("./events");
 const calls_1 = require("./calls");
+const actors_1 = require("./actors");
 dotenv.config();
 const env = process.env.NODE_ENV || "development";
 const config = {
@@ -12,11 +13,6 @@ const config = {
     "database": process.env.DB_SCHEMA,
     "host": process.env.DB_ADDR,
     "dialect": "mysql",
-    // "charset": "latin1",
-    // "collate": "latin1_swedish_ci",
-    // "logging": (data, benchmark) => {
-    //     console.log(JSON.stringify({time: new Date().getTime(), query: data, executionTime: benchmark}))
-    // },
     "benchmark": true,
     "pool": {
         "max": 100,
@@ -42,5 +38,6 @@ exports.database = knex({
 });
 events_1.setupEventsTable(exports.database);
 calls_1.setupCallsTable(exports.database);
+actors_1.setupActorsTable(exports.database);
 exports.default = exports.database;
 //# sourceMappingURL=index.js.map

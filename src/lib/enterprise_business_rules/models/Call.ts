@@ -17,7 +17,7 @@ export class Call extends StateTrasition {
             "NEW": new State("NEW", ["STANDBY"]),
             "STANDBY": new State("STANDBY", ["WAITING"]),
             "WAITING": new State("WAITING", ["ONGOING"]),
-            "ONGOIG": new State("ONGOING", ["FINISHED"]),
+            "ONGOING": new State("ONGOING", ["FINISHED"]),
             "FINISHED": new State("FINISHED")
         };
         super(state, callStates);

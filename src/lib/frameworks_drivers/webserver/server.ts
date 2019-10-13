@@ -5,6 +5,7 @@ import {eventProcessor} from "./event_processor"
 import * as expresspino from "express-pino-logger"
 import IServer from "./server_interface";
 import {
+    ActorEntered, ActorLeft,
     CallFinished,
     CallNew,
     CallOngoing,
@@ -37,7 +38,9 @@ export default class ExpressServer implements IServer {
         eventProcessor.addEventHandlerWithKey(Events.CallStandby,CallStandBy);
         eventProcessor.addEventHandlerWithKey(Events.CallWaiting,CallWaiting);
         eventProcessor.addEventHandlerWithKey(Events.CallOngoing,CallOngoing);
-        eventProcessor.addEventHandlerWithKey(Events.CallOngoing,CallFinished);
+        eventProcessor.addEventHandlerWithKey(Events.CallFinished,CallFinished);
+        eventProcessor.addEventHandlerWithKey(Events.ActorEntered,ActorEntered);
+        eventProcessor.addEventHandlerWithKey(Events.ActorLeft,ActorLeft);
     }
 
     //Registers the REST routes

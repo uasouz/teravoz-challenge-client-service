@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const result_1 = require("../../enterprise_business_rules/util/result");
+// Possible call states
 const States = new Map(Object.entries({
     "call.new": "NEW",
     "call.standby": "STANDBY",
@@ -16,6 +17,7 @@ const States = new Map(Object.entries({
     "call.ongoing": "ONGOING",
     "call.finished": "FINISHED"
 }));
+// Set a datermined state to a call based on received event
 function SetCallState(callEvent, callRepository) {
     return __awaiter(this, void 0, void 0, function* () {
         const call = yield callRepository.FindCall({ aggregate_id: callEvent.call_id });

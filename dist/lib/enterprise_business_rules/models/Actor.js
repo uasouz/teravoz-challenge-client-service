@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const binary_uuid_1 = require("../../util/binary-uuid/binary-uuid");
-//Event class serializes event coming/going from/to the database
-class Event {
-    constructor(id, aggregate_id, uuid, event) {
+//Actor class serializes events coming from the database to be used by the service
+class Actor {
+    constructor(id, uuid, actor, number) {
         this.id = id;
-        this.aggregate_id = aggregate_id;
         this.uuid = binary_uuid_1.fromBinaryUUID(uuid);
-        this.event = event;
+        this.actor = actor;
+        this.number = number;
     }
-    static serializeSingle(event) {
-        return new Event(event.id, event.aggregate_id, event.uuid, event.event);
+    static serializeSingle(actor) {
+        return new Actor(actor.id, actor.uuid, actor.actor, actor.number);
     }
     static serialize(data) {
         if (!data) {
@@ -22,5 +22,5 @@ class Event {
         return this.serializeSingle(data);
     }
 }
-exports.Event = Event;
-//# sourceMappingURL=Event.js.map
+exports.Actor = Actor;
+//# sourceMappingURL=Actor.js.map

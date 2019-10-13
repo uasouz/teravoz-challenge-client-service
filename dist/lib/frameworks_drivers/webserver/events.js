@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//Set of Events possible to be received on WebHook
 var Events;
 (function (Events) {
     //Call Events

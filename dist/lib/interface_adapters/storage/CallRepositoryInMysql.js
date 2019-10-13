@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("../../frameworks_drivers/database");
 const Call_1 = require("../../enterprise_business_rules/models/Call");
+// CallRepository Interface implementation for MySql
 class CallRepositoryInMysql {
     FindCall(params) {
         return __awaiter(this, void 0, void 0, function* () {

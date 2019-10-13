@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// Serializes and respond data,messages and errors from the Web Service
 class BaseResponse {
     constructor(success = false, code = 500, data = null, errors = null, message = "") {
         this.success = success;

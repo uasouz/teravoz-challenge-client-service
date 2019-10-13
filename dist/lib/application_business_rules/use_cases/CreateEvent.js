@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const binary_uuid_1 = require("../../util/binary-uuid/binary-uuid");
+//Serializes a event to be recorded on the database
 function CreateEvent(event) {
     return {
         uuid: binary_uuid_1.createBinaryUUID().buffer,

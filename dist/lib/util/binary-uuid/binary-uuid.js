@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const v1 = require("uuid/v1");
+//Utils used to convert UUIDs to and from compacted binary format
 function fromBinaryUUID(buf) {
     return [
         buf.toString("hex", 4, 8),
