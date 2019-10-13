@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 import database from "./lib/frameworks_drivers/database";
+import UWSServer from "./lib/frameworks_drivers/websocket_server/server";
 import {Logger} from "./lib/frameworks_drivers/logger";
 
 // Start the server
@@ -21,6 +22,10 @@ const start = async () => {
 
     try {
         const server = new ExpressServer();
+        const wsServer = new UWSServer();
+        wsServer.registerRoutes();
+        wsServer.initializeHandlers();
+        wsServer.listen(4000);
         console.log('Server running at port:', server.listen(3000));
     } catch (err) {
         Logger.info(err);
