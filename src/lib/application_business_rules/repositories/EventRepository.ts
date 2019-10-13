@@ -2,6 +2,10 @@ import {Event} from "../../enterprise_business_rules/models/Event";
 
 //EventRepository interface
 export interface IEventRepository {
+
+    ListEvents(params: any): Promise<Event[]>
+
+
     //RegisterEvent records the informed a event to databasa
     RegisterEvent(event: any): Promise<Event>
 

@@ -11,16 +11,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const message_1 = require("../../frameworks_drivers/websocket_server/message");
 const CallRepositoryInMysql_1 = require("../storage/CallRepositoryInMysql");
 const EventRepositoryInMysql_1 = require("../storage/EventRepositoryInMysql");
+// Search for calls based on the informed params
 function ListCalls(ws, message) {
     return __awaiter(this, void 0, void 0, function* () {
-        const calls = yield CallRepositoryInMysql_1.callRepository.FindCall(message.data.params);
-        ws.send(message_1.createMessage(calls, "ListCalls").toString());
+        const calls = yield CallRepositoryInMysql_1.callRepository.ListCalls(message.data.params);
+        ws.send(message_1.createMessage(calls ? calls : [], "ListCalls").toString());
     });
 }
 exports.ListCalls = ListCalls;
+// List all events for the given call_id
 function ListCallEvents(ws, message) {
     return __awaiter(this, void 0, void 0, function* () {
-        const events = yield EventRepositoryInMysql_1.eventRepository.FindEvent({ aggregate_id: message.data.call_id });
+        const events = yield EventRepositoryInMysql_1.eventRepository.ListEvents({ aggregate_id: message.data.call_id });
         ws.send(message_1.createMessage(events, "ListCallEvents").toString());
     });
 }

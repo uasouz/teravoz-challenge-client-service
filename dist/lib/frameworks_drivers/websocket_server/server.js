@@ -9,7 +9,7 @@ class uWsServer {
     constructor() {
         this.decoder = new TextDecoder("utf-8");
         this.app = uWebSockets_js_1.App();
-        this.app.ws("/ws/*", {
+        this.app.ws("/*", {
             /* Options */
             compression: 0,
             maxPayloadLength: 16 * 1024 * 1024,

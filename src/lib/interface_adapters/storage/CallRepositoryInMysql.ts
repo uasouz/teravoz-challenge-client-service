@@ -26,6 +26,18 @@ class CallRepositoryInMysql implements ICallRepository {
         return this.FindCall({id: result})
     }
 
+    async ListCalls(params: any): Promise<Call[]> {
+        let result = database('calls');
+        if (Array.isArray(params)) {
+            params.forEach((value) => {
+                result = result.orWhere(value)
+            })
+        } else {
+            result = result.where(params)
+        }
+        return result
+    }
+
 }
 
 export const callRepository = new CallRepositoryInMysql();

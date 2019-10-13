@@ -21,6 +21,19 @@ class EventRepositoryInMysql implements IEventRepository {
         const result = await database('events').insert(CreateEvent(event), ["*"]);
         return this.FindEvent({id: result[0]})
     }
+
+    async ListEvents(params: any): Promise<Event[]> {
+        let result = database('events');
+        if (Array.isArray(params)) {
+            params.forEach((value) => {
+                result = result.orWhere(value)
+            })
+        } else {
+            result = result.where(params)
+        }
+        const events = await result;
+        return events.map(Event.serialize.bind(Event))
+    }
 }
 
 export const eventRepository = new EventRepositoryInMysql();

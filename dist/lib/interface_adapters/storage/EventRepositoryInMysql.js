@@ -33,6 +33,21 @@ class EventRepositoryInMysql {
             return this.FindEvent({ id: result[0] });
         });
     }
+    ListEvents(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = database_1.default('events');
+            if (Array.isArray(params)) {
+                params.forEach((value) => {
+                    result = result.orWhere(value);
+                });
+            }
+            else {
+                result = result.where(params);
+            }
+            const events = yield result;
+            return events.map(Event_1.Event.serialize.bind(Event_1.Event));
+        });
+    }
 }
 exports.eventRepository = new EventRepositoryInMysql();
 //# sourceMappingURL=EventRepositoryInMysql.js.map

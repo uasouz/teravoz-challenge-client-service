@@ -39,9 +39,8 @@ class App {
                 process.exit(1);
             }
         };
+        this.start();
     }
 }
-exports.App = App;
-const app = new App();
-app.start();
+exports.app = new App();
 //# sourceMappingURL=index.js.map

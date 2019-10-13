@@ -10,7 +10,7 @@ export default class uWsServer {
 
     constructor() {
         this.app = App();
-        this.app.ws("/ws/*", {
+        this.app.ws("/*", {
             /* Options */
             compression: 0,//0 - disabled | 1 - Shared Compressor | 2 - Dedicated Compressor
             maxPayloadLength: 16 * 1024 * 1024,

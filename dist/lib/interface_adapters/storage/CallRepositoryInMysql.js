@@ -38,6 +38,20 @@ class CallRepositoryInMysql {
             return this.FindCall({ id: result });
         });
     }
+    ListCalls(params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = database_1.default('calls');
+            if (Array.isArray(params)) {
+                params.forEach((value) => {
+                    result = result.orWhere(value);
+                });
+            }
+            else {
+                result = result.where(params);
+            }
+            return result;
+        });
+    }
 }
 exports.callRepository = new CallRepositoryInMysql();
 //# sourceMappingURL=CallRepositoryInMysql.js.map
