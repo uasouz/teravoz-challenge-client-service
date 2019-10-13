@@ -10,7 +10,6 @@ var should = require('chai').should();
 
 
 describe('Test CallStandby Event', function () {
-    console.log("Starting test");
     before((done) => {
         done()
     });

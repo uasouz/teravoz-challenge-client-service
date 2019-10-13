@@ -10,7 +10,6 @@ var should = require('chai').should();
 
 
 describe('Test CallWaiting Event', function () {
-    console.log("Starting test");
     before((done) => {
         done()
     });
