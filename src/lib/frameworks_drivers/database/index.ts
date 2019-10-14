@@ -44,8 +44,13 @@ export const database = knex({
     }
 });
 
-setupEventsTable(database);
-setupCallsTable(database);
-setupActorsTable(database);
+async function setupDatabase(){
+    database.raw(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_SCHEMA}`);
+    await setupEventsTable(database);
+    await setupCallsTable(database);
+    await setupActorsTable(database);
+}
+
+setupDatabase();
 
 export default database;
