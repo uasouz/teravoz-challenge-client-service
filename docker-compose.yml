@@ -29,6 +29,18 @@ services:
     networks:
       - app-network
 
+  client:
+    build:
+      context: teravoz-challenge-client
+      dockerfile: Dockerfile
+    ports:
+        - "80:80"
+    links:
+        - teravoz-service
+    depends_on:
+        - teravoz-service
+    networks:
+        - app-network
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password

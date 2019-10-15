@@ -164,4 +164,4 @@ Example Response:
 
 ## Docker
 
-The project has a Dockerfile for the Node.JS service and a docker-compose with a Redis(used as PubSub system) and a Mysql Database
+The project has a Dockerfile for the Node.JS service and a docker-compose with the service,the client,a Redis(used as PubSub system) and a Mysql Database
