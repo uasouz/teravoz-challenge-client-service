@@ -165,3 +165,5 @@ Example Response:
 ## Docker
 
 The project has a Dockerfile for the Node.JS service and a docker-compose with the service,the client,a Redis(used as PubSub system) and a Mysql Database
+
+You can run the project with a `docker-compose up -d` and access the client UI at localhost
