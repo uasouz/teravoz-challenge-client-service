@@ -16,11 +16,15 @@ export class BaseResponse {
 
     static Succeed(res: any, data: any,  code = 200, success = true,message = "") {
         res.status(code);
-        res.json(new this(success, code, data, null, message));
+        const response = new this(success, code, data, null, message);
+        res.json(response);
+        return response;
     }
 
     static Fail(res: any, errors: any,  code = 500, success = false, message = "") {
         res.status(code);
-        res.json(new this(success, code, null, errors, message));
+        const response = new this(success, code, null, errors, message)
+        res.json(response);
+        return response
     }
 }

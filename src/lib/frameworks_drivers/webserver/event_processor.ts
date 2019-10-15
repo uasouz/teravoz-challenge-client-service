@@ -1,6 +1,8 @@
 import {Logger} from "../logger";
 import {Request, Response} from "express";
 import {BaseResponse} from "../../interface_adapters/util/response";
+import {Publisher} from "./publisher";
+import {createMessage} from "../websocket_server/message";
 
 class EventProcessor {
 
@@ -29,17 +31,21 @@ class EventProcessor {
         this.eventHandlers.set(f.name, f)
     }
 
-    processEvent(req: Request, res: Response) {
+    processEvent(req: Request, res: Response, publisher?: Publisher) {
         const eventHandler = this.eventHandlers.get(req.body.type);
         if (eventHandler) {
             try {
-                eventHandler(req, res)
+                eventHandler(req, res).then((result: any) => {
+                    if (publisher && result.success) {
+                        publisher.publish("main", createMessage({}, "DataChanged"))
+                    }
+                })
             } catch (e) {
                 Logger.error("Error ", e)
             }
         } else {
             BaseResponse.Fail(res,
-                [ "no suitable eventHandler for this event"]
+                ["no suitable eventHandler for this event"]
             )
         }
     }

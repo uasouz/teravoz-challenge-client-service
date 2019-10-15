@@ -38,6 +38,7 @@ class App {
         try {
             this.server = new ExpressServer();
             const wsServer = new UWSServer();
+            this.server.setPusblisher(wsServer);
             wsServer.registerRoutes();
             wsServer.initializeHandlers();
             wsServer.listen(4000);

@@ -14,12 +14,13 @@ import {
 } from "../../interface_adapters/controllers/WebHookController";
 import {Events} from "./events";
 import {Server} from "http";
+import {Publisher} from "./publisher";
 
 //Server interface implementation using Express
 export default class ExpressServer implements IServer {
     public express: express.Application;
     listener?: Server;
-
+    publisher?: Publisher;
     address(){
         if(this.listener) {
             return this.listener.address()
@@ -53,7 +54,7 @@ export default class ExpressServer implements IServer {
 
     //Registers the REST routes
     registerRoutes() {
-        this.express.post("/webhook", eventProcessor.processEvent.bind(eventProcessor));
+        this.express.post("/webhook", (req,res)=> eventProcessor.processEvent.bind(eventProcessor)(req,res,this.publisher));
     }
 
     listen(port: number | string) {
@@ -61,5 +62,9 @@ export default class ExpressServer implements IServer {
         this.listener = this.express.listen(port);
         return this.listener.address()
 
+    }
+
+    setPusblisher(publisher: Publisher) {
+        this.publisher = publisher
     }
 }
