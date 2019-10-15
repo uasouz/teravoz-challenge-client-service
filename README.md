@@ -8,11 +8,11 @@ It has a _webhook_ as a REST endpoint,which is suposed to be called by TeraVoz's
 
 ![alt text](https://miro.medium.com/max/720/1*D1EvAeK74Gry46JMZM4oOQ.png "Clean Architecture")
 
-On this project i use a Clean Architecture approach to create a easy to mantain and readable source code.
+On this project i used a Clean Architecture approach to create a easy to mantain and readable source code.
 
 The core idea was to build every part as decoupled as possible from the others and make them testable e resusable as well. To achieve this purpose i created interfaces for every part of the API that i want to be easily replaced or modified (eg: ICallRepository can be implemented either in MySql or Mongo,or any other kind of storage). This was one of the reasons i choosed TypeScript as language for this service.
 
-Another important advantage is the segregation between the webserver,database,API clients and other frameworks and drivers from the business logic. It brings a even bigger advantage if is done with functional programming principles in mind, helping to create functions with minimal to zero side effects and predictable results.
+Another important advantage is the segregation between the webserver,database,API clients and other frameworks and drivers from the business logic. This brings a even bigger advantage if is done with functional programming principles in mind, helping to create functions with minimal to zero side effects and predictable results.
 
 Last but not less important, i used a few concepts of event sourcing,which can improve the functional way to think and also brings a entire new view about how to deal with data. Saving every event give us the chance to rebuild our data at any moment in time.
 
@@ -20,7 +20,7 @@ Last but not less important, i used a few concepts of event sourcing,which can i
 
 The webhook endpoint was implemented according to TeraVoz's API specification and uses a simple map-based event processor to route the request to the correct function based on the event type sent by TeraVoz.
 
-Currenttly this api accepts the flowing event types:
+Currenttly this api accepts the following event types:
 `call.new`, `call.standby`, `call.waiting`, `actor.entered`, `call.ongoing`, `actor.left`, `call.finished`
 
 ## WebSocket
